@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bgqsub0qa3sr5"]
+
+[ext_resource type="Script" uid="uid://dk5533qdb3eyk" path="res://Enemy/spawners/enemy_spawner.gd" id="1_gg41u"]
+[ext_resource type="PackedScene" uid="uid://bkx43x85qohot" path="res://Enemy/enemy_one.tscn" id="2_yky2f"]
+[ext_resource type="Texture2D" uid="uid://clp4ltcfya45a" path="res://icon.svg" id="3_yky2f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u08si"]
+size = Vector2(285.5, 234)
+
+[node name="EnemySpawner" type="Area2D" unique_id=226839247]
+script = ExtResource("1_gg41u")
+enemy_scene = ExtResource("2_yky2f")
+max_enemies = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=818373458]
+shape = SubResource("RectangleShape2D_u08si")
+
+[node name="Timer" type="Timer" parent="." unique_id=1938038662]
+autostart = true
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=6998593]
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("3_yky2f")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

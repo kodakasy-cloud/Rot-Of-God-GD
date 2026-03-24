@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://drlodjngxb1r0"]
+
+[ext_resource type="PackedScene" uid="uid://bu1t80x5hprjd" path="res://Player/player.tscn" id="1_74bqr"]
+[ext_resource type="PackedScene" uid="uid://bgqsub0qa3sr5" path="res://Enemy/spawners/enemy_spawner.tscn" id="2_74bqr"]
+
+[node name="Node2D" type="Node2D" unique_id=910822508]
+
+[node name="CharacterBody2D" parent="." unique_id=352634641 instance=ExtResource("1_74bqr")]
+position = Vector2(334, 165)
+
+[node name="EnemySpawner" parent="." unique_id=226839247 instance=ExtResource("2_74bqr")]
+position = Vector2(-185, -38)
