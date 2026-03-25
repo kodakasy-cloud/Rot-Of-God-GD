@@ -1,12 +1,53 @@
 [gd_scene format=3 uid="uid://drlodjngxb1r0"]
 
 [ext_resource type="PackedScene" uid="uid://bu1t80x5hprjd" path="res://Player/player.tscn" id="1_74bqr"]
+[ext_resource type="Script" uid="uid://l3g7tegxhmua" path="res://Cenas/main.gd" id="1_ja1os"]
 [ext_resource type="PackedScene" uid="uid://bgqsub0qa3sr5" path="res://Enemy/spawners/enemy_spawner.tscn" id="2_74bqr"]
+[ext_resource type="Script" uid="uid://dx15elp4458xo" path="res://Systems/inventory_ui.gd" id="3_ruij7"]
+[ext_resource type="PackedScene" uid="uid://cqph50hrcfvtp" path="res://Itens/moeda.tscn" id="4_lb8y5"]
 
-[node name="Node2D" type="Node2D" unique_id=910822508]
+[node name="main" type="Node2D" unique_id=910822508]
+script = ExtResource("1_ja1os")
+item_scene = ExtResource("4_lb8y5")
 
 [node name="CharacterBody2D" parent="." unique_id=352634641 instance=ExtResource("1_74bqr")]
 position = Vector2(334, 165)
 
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=936573391]
+
+[node name="InventoryUI" type="Control" parent="CanvasLayer" unique_id=617137718]
+self_modulate = Color(0.98274976, 6.08854e-06, 1.540184e-06, 1)
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("3_ruij7")
+
+[node name="ItemList" type="ItemList" parent="CanvasLayer/InventoryUI" unique_id=274940865]
+layout_mode = 0
+offset_left = 977.0
+offset_top = 258.0
+offset_right = 1360.0
+offset_bottom = 720.0
+mouse_filter = 1
+mouse_force_pass_scroll_events = false
+allow_reselect = true
+max_columns = 0
+same_column_width = true
+icon_mode = 0
+icon_scale = 2.0
+fixed_icon_size = Vector2i(48, 60)
+
 [node name="EnemySpawner" parent="." unique_id=226839247 instance=ExtResource("2_74bqr")]
 position = Vector2(-185, -38)
+
+[node name="Area2D" parent="." unique_id=743837759 instance=ExtResource("4_lb8y5")]
+position = Vector2(882, 404)
+item_name = null
+
+[node name="Area2D2" parent="." unique_id=613617383 instance=ExtResource("4_lb8y5")]
+position = Vector2(737, 454)
+item_name = null
+
+[node name="Area2D3" parent="." unique_id=2067492562 instance=ExtResource("4_lb8y5")]
+position = Vector2(768, 360)
+item_name = null

@@ -8,7 +8,8 @@ var current_health: int = max_health
 
 # --- NOVA LÓGICA DE ÓRBITA ---
 var orbit_direction: int = 1 # 1 para horário, -1 para anti-horário
-var change_orbit_time: float = 2.0 # Tempo para trocar de lado
+var change_orbit_time: float = 2.0
+
 
 # --- REFERÊNCIAS ---
 var player: CharacterBody2D = null
