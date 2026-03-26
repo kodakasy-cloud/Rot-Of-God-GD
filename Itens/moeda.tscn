@@ -1,24 +1,22 @@
 [gd_scene format=3 uid="uid://cqph50hrcfvtp"]
 
 [ext_resource type="Script" uid="uid://cdhanra1k0chr" path="res://Itens/moeda.gd" id="1_1p4wc"]
-[ext_resource type="Texture2D" uid="uid://bbgh2ekjnhqxp" path="res://Enemy/sprite/pixilart-sprite.png" id="1_3omld"]
+[ext_resource type="Texture2D" uid="uid://bh7yhp5e1qdjj" path="res://Itens/moeda.png" id="2_1p4wc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1p4wc"]
-size = Vector2(17, 35.25)
+size = Vector2(42.5, 43.625)
 
-[node name="Area2D" type="Area2D" unique_id=743837759]
+[node name="moeda" type="Area2D" unique_id=743837759]
 script = ExtResource("1_1p4wc")
 item_name = "moeda"
 amount = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=188955902]
-position = Vector2(0.5, 1.625)
+scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_1p4wc")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1744143795]
-position = Vector2(-2.3841858e-07, 2.3841858e-07)
-scale = Vector2(0.49479166, 0.59375)
-texture = ExtResource("1_3omld")
-hframes = 3
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_1p4wc")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

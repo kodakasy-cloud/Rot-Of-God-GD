@@ -3,15 +3,22 @@
 [ext_resource type="PackedScene" uid="uid://bu1t80x5hprjd" path="res://Player/player.tscn" id="1_74bqr"]
 [ext_resource type="Script" uid="uid://l3g7tegxhmua" path="res://Cenas/main.gd" id="1_ja1os"]
 [ext_resource type="PackedScene" uid="uid://bgqsub0qa3sr5" path="res://Enemy/spawners/enemy_spawner.tscn" id="2_74bqr"]
+[ext_resource type="PackedScene" uid="uid://c0bfdhmw6jrf6" path="res://Cenas/Tilemap/terreno.tscn" id="3_qns0q"]
 [ext_resource type="Script" uid="uid://dx15elp4458xo" path="res://Systems/inventory_ui.gd" id="3_ruij7"]
 [ext_resource type="PackedScene" uid="uid://cqph50hrcfvtp" path="res://Itens/moeda.tscn" id="4_lb8y5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qns0q"]
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
 
 [node name="main" type="Node2D" unique_id=910822508]
 script = ExtResource("1_ja1os")
 item_scene = ExtResource("4_lb8y5")
 
+[node name="terreno" parent="." unique_id=731141222 instance=ExtResource("3_qns0q")]
+position = Vector2(-345, -71)
+
 [node name="CharacterBody2D" parent="." unique_id=352634641 instance=ExtResource("1_74bqr")]
-position = Vector2(334, 165)
+position = Vector2(357, 258)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=936573391]
 
@@ -24,10 +31,10 @@ script = ExtResource("3_ruij7")
 
 [node name="ItemList" type="ItemList" parent="CanvasLayer/InventoryUI" unique_id=274940865]
 layout_mode = 0
-offset_left = 977.0
-offset_top = 258.0
-offset_right = 1360.0
-offset_bottom = 720.0
+offset_left = 1024.0
+offset_top = 147.0
+offset_right = 1368.0
+offset_bottom = 584.0
 mouse_filter = 1
 mouse_force_pass_scroll_events = false
 allow_reselect = true
@@ -37,17 +44,19 @@ icon_mode = 0
 icon_scale = 2.0
 fixed_icon_size = Vector2i(48, 60)
 
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/InventoryUI" unique_id=171024262]
+layout_mode = 0
+offset_left = 1028.0
+offset_top = 151.0
+offset_right = 1364.0
+offset_bottom = 580.0
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/InventoryUI/GridContainer" unique_id=1737651773]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qns0q")
+
 [node name="EnemySpawner" parent="." unique_id=226839247 instance=ExtResource("2_74bqr")]
-position = Vector2(-185, -38)
-
-[node name="Area2D" parent="." unique_id=743837759 instance=ExtResource("4_lb8y5")]
-position = Vector2(882, 404)
-item_name = null
-
-[node name="Area2D2" parent="." unique_id=613617383 instance=ExtResource("4_lb8y5")]
-position = Vector2(737, 454)
-item_name = null
-
-[node name="Area2D3" parent="." unique_id=2067492562 instance=ExtResource("4_lb8y5")]
-position = Vector2(768, 360)
-item_name = null
+position = Vector2(-460, -107)

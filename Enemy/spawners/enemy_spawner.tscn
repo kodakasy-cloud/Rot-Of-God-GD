@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://clp4ltcfya45a" path="res://icon.svg" id="3_yky2f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u08si"]
-size = Vector2(285.5, 234)
+size = Vector2(659.875, 523)
 
 [node name="EnemySpawner" type="Area2D" unique_id=226839247]
 script = ExtResource("1_gg41u")
@@ -13,6 +13,7 @@ enemy_scene = ExtResource("2_yky2f")
 max_enemies = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=818373458]
+position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_u08si")
 
 [node name="Timer" type="Timer" parent="." unique_id=1938038662]

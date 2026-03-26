@@ -2,6 +2,7 @@ extends Area2D
 
 @export var enemy_scene: PackedScene # Arraste o seu enemy_one.tscn aqui
 @export var max_enemies: int = 5
+@export var moeda_scene: PackedScene
 
 @onready var collision_shape = $CollisionShape2D
 @onready var timer = $Timer

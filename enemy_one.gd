@@ -4,12 +4,12 @@ extends CharacterBody2D
 @export var speed: float = 150.0
 @export var acceleration: float = 5.0
 @export var max_health: int = 10
+@export var moeda_scene: PackedScene # <--- NOVO: Arraste a moeda.tscn aqui no Inspector
 var current_health: int = max_health
 
 # --- NOVA LÓGICA DE ÓRBITA ---
 var orbit_direction: int = 1 # 1 para horário, -1 para anti-horário
 var change_orbit_time: float = 2.0
-
 
 # --- REFERÊNCIAS ---
 var player: CharacterBody2D = null
@@ -39,7 +39,6 @@ func _physics_process(delta: float) -> void:
 		
 		if is_in_attack_range:
 			# LÓGICA DE ÓRBITA ALEATÓRIA
-			# Multiplicamos pela 'orbit_direction' (1 ou -1)
 			var orbit_dir = Vector2(-direction_to_player.y, direction_to_player.x) * orbit_direction
 			velocity = velocity.lerp(orbit_dir * speed, acceleration * delta)
 		else:
@@ -52,13 +51,8 @@ func _physics_process(delta: float) -> void:
 
 # --- FUNÇÃO PARA MUDAR A DIREÇÃO DA ÓRBITA ---
 func _start_orbit_timer() -> void:
-	# Escolhe um tempo aleatório entre 1.5 e 4 segundos para mudar de lado
 	await get_tree().create_timer(randf_range(1.5, 4.0)).timeout
-	
-	# Inverte a direção (se era 1 vira -1, se era -1 vira 1)
 	orbit_direction *= -1
-	
-	# Reinicia o ciclo (Recursividade)
 	_start_orbit_timer()
 
 # --- FUNÇÃO DE DANO ---
@@ -76,8 +70,35 @@ func take_damage(amount: int) -> void:
 	if current_health <= 0:
 		die()
 
+# --- NOVA LÓGICA DE MORTE E DROP ---
 func die() -> void:
+	drop_item() # Chama o drop antes de morrer
 	queue_free()
+
+func drop_item() -> void:
+	# 1. Checa a chance de drop (0.4 = 40%)
+	var sorteio = randf()
+	if sorteio > 0.4:
+		print("Azar! O inimigo não dropou nada desta vez.")
+		return # Sai da função e não spawna nada
+
+	# 2. Se passou na chance, verifica se a cena existe
+	if moeda_scene:
+		var nova_moeda = moeda_scene.instantiate()
+		
+		# 3. Define a quantidade aleatória entre 3 e 5
+		# Importante: Sua moeda precisa ter a variável 'amount' no script dela!
+		var quantidade_aleatoria = randi_range(30, 50)
+		nova_moeda.amount = quantidade_aleatoria
+		
+		# 4. Adiciona ao mundo
+		get_tree().current_scene.add_child(nova_moeda)
+		nova_moeda.global_position = global_position
+		nova_moeda.z_index = 1
+		
+		print("Drop de sorte! Criada moeda com valor: ", quantidade_aleatoria)
+	else:
+		print("Erro: Moeda Scene não configurada no Inspector!")
 
 # --- SINAIS ---
 func _on_detection_range_body_entered(body: Node2D) -> void:
